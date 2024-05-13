@@ -20,28 +20,3 @@
   font-weight: bold;
   margin-bottom: 1rem;
 }
-
-.actionButtonGroup {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-}
-
-.addCardButton {
-  background-color: rgb(89, 89, 241);
-  color: white;
-  padding: 10px;
-  border-radius: 5px;
-}
-
-.addCardInput {
-  border-radius: 2px;
-  border: none;
-  padding: 10px;
-  margin-bottom: 10px;
-  width: 100%;
-}
-
-.addButton {
-  text-align: start;
-}
