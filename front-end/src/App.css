@@ -21,9 +21,3 @@ body {
   display: flex;
   gap: 1rem;
 }
-
-.add-column-container {
-  background-color: rgba(333, 33, 333, 0.5);
-  padding: 1rem;
-  border-radius: 10px;
-}

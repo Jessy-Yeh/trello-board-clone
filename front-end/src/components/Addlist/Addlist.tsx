@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styles from "./Addlist.module.css";
 
 interface Props {
   listTitles: string[];
@@ -11,27 +12,44 @@ const Addlist = ({ listTitles, setListTitles }: Props) => {
 
   const addNewListTitle = () => {
     setListTitles([...listTitles, newlistTitle]);
+    setNewListTitle("");
+  };
+
+  const handleKeyUp = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === "Enter") {
+      addNewListTitle();
+      setNewListTitle("");
+    }
   };
   return (
-    <div className="add-column-container">
+    <div className={styles.container}>
       {isAddButtonClicked ? (
         <>
           <input
+            className={styles.input}
             value={newlistTitle}
             placeholder="Enter list title..."
             onChange={(e) => setNewListTitle(e.target.value)}
+            onKeyUp={handleKeyUp}
           />
-          <button onClick={addNewListTitle}>Add list</button>
-          <button
-            onClick={() => {
-              setIsAddButtonClicked((prev) => !prev);
-            }}
-          >
-            X
-          </button>
+          <div className={styles.actionButtonGroup}>
+            <button className={styles.addListButton} onClick={addNewListTitle}>
+              Add list
+            </button>
+            <button
+              onClick={() => {
+                setIsAddButtonClicked((prev) => !prev);
+              }}
+            >
+              X
+            </button>
+          </div>
         </>
       ) : (
-        <button onClick={() => setIsAddButtonClicked((prev) => !prev)}>
+        <button
+          className={styles.addButton}
+          onClick={() => setIsAddButtonClicked((prev) => !prev)}
+        >
           + Add another list
         </button>
       )}

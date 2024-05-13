@@ -1,0 +1,34 @@
+.container {
+  background-color: rgba(218, 193, 220, 0.6);
+  padding: 1rem;
+  border-radius: 10px;
+  align-self: start;
+  color: white;
+  width: 250px;
+}
+
+.actionButtonGroup {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.addButton {
+  background-color: transparent;
+  color: white;
+}
+
+.input {
+  border-radius: 2px;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.addListButton {
+  background-color: rgb(89, 89, 241);
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+}
