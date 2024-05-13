@@ -1,11 +1,12 @@
 import { useState } from "react";
+import styles from "./List.module.css";
 
 interface Props {
   title: string;
 }
 
 const List = ({ title }: Props) => {
-  const [cards, setCards] = useState(["meeting with stakeholders"]);
+  const [cards, setCards] = useState([]);
   const [cardValue, setCardValue] = useState("");
 
   const handleChange = (e) => {
@@ -19,12 +20,12 @@ const List = ({ title }: Props) => {
     }
   };
   return (
-    <>
-      <ul>
+    <div className={styles.container}>
+      <ul className={styles.list}>
         {title}
-        {cards.map((card, index) => (
-          <li key={index}>{card}</li>
-        ))}
+        {cards.length > 0
+          ? cards.map((card, index) => <li key={index}>{card}</li>)
+          : null}
       </ul>
       <input
         type="text"
@@ -32,7 +33,7 @@ const List = ({ title }: Props) => {
         onChange={handleChange}
         onKeyUp={addCard}
       ></input>
-    </>
+    </div>
   );
 };
 

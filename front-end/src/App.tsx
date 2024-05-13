@@ -6,8 +6,9 @@ function App() {
     <>
       <h1>Trello</h1>
       <h2>Project Management</h2>
-      <div>
+      <div className="lists">
         <List title="Project Resources" />
+        <List title="To Do" />
       </div>
     </>
   );
