@@ -1,11 +1,11 @@
 import "./App.css";
 import Board from "./components/Board/Board";
+import Navbar from "./components/Navbar/Navbar";
 
 function App() {
   return (
     <>
-      <h1>Trello</h1>
-      <h2>Project Management</h2>
+      <Navbar />
       <Board />
     </>
   );

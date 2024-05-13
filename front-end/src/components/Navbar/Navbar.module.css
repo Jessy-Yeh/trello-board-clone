@@ -1,0 +1,19 @@
+.container {
+  color: white;
+  padding: 1rem;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.logoContainer img {
+  width: 30px;
+}
+
+.logoContainer h1 {
+  font-size: 1.5rem;
+}
