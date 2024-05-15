@@ -1,13 +1,14 @@
-export type Card = [
-  {
-    item: string;
-    label: string;
-  }
-];
-
-export type List = {
+export type CardType = {
   title: string;
-  cards: Card;
+  label: string;
 };
 
-export type BoardType = List[];
+export type ListType = {
+  title: string;
+  cards: CardType[];
+};
+
+export type BoardType = {
+  title: string;
+  lists: ListType[];
+};
