@@ -10,35 +10,43 @@ app.listen(PORT, () => {
   console.log("server listening on PORT:", PORT);
 });
 
-let lists = [
+const board = [
   {
-    id: 1,
-    title: "stand up meeting",
+    title: "to do",
+    cards: [
+      {
+        item: "folding clothes",
+        label: "important",
+      },
+      { item: "washing dishes" },
+    ],
   },
   {
-    id: 2,
-    title: "retro",
+    title: "questions",
+    cards: [
+      {
+        item: "Who is bao?",
+        label: "important",
+      },
+      { item: "where is mao?" },
+      { item: "rrrrrr" },
+    ],
   },
 ];
 
-//get all lists
-app.get("/lists", (req, res) => {
-  res.json(lists);
+app.get("/board", (req, res) => {
+  res.send(board);
 });
 
-//add a new list
-app.post("lists", (req, res) => {
-  const newList = { id: lists.length + 1, title: req.body.title };
-  lists.push(newList);
-  res.status(201).json(newList);
+app.post("board", (req, res) => {
+  res.send(req.body);
 });
 
-//delete a list
-app.delete("lists/:id", (req, res) => {
-  const listId = parseInt(req.params.id);
-  lists = lists.filter((list) => list.id !== listId);
-  res.sendStatus(2.4);
-});
+// app.delete("board/:id", (req, res) => {
+//   const listId = parseInt(req.params.id);
+//   lists = lists.filter((list) => list.id !== listId);
+//   res.sendStatus(2.4);
+// });
 
 // app.get("/app", (req, res) => {
 //   res.sendFile(
