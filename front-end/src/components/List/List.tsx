@@ -4,9 +4,10 @@ import AddItem from "../AddItem/AddItem";
 
 interface Props {
   title: string;
+  list: { title: string; cards: [{ item: string; label: string }] };
 }
 
-const List = ({ title }: Props) => {
+const List = ({ title, list }: Props) => {
   const [cards, setCards] = useState<string[]>([]);
 
   const addCard = (newCard: string) => {
@@ -17,9 +18,12 @@ const List = ({ title }: Props) => {
     <div className={styles.container}>
       <h2 className={styles.title}>{title}</h2>
       <ul className={styles.list}>
-        {cards.length > 0
+        {list.cards.map((card, index) => {
+          return <li key={index}>{card.item}</li>;
+        })}
+        {/* {cards.length > 0
           ? cards.map((card, index) => <li key={index}>{card}</li>)
-          : null}
+          : null} */}
       </ul>
 
       <AddItem itemType="card" addItem={addCard} />
