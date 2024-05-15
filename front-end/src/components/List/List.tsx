@@ -1,29 +1,35 @@
-import { useState } from "react";
 import styles from "./List.module.css";
 import AddItem from "../AddItem/AddItem";
+import { ListType, BoardType } from "../../types";
 
 interface Props {
-  title: string;
-  list: { title: string; cards: [{ item: string; label: string }] };
+  list: ListType;
+  boardData: BoardType;
+  setBoardData: React.Dispatch<React.SetStateAction<BoardType | null>>;
 }
 
-const List = ({ title, list }: Props) => {
-  const [cards, setCards] = useState<string[]>([]);
+const List = ({ list, boardData, setBoardData }: Props) => {
+  const addCard = (title: string) => {
+    const newCard = { title, label: "" };
+    const updatedCards = [...list.cards, newCard];
+    const newlists = [...boardData.lists];
 
-  const addCard = (newCard: string) => {
-    setCards([...cards, newCard]);
+    newlists.forEach((newlist) => {
+      if (newlist.title === list.title) {
+        newlist.cards = updatedCards;
+      }
+    });
+
+    setBoardData({ ...boardData, lists: newlists });
   };
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>{title}</h2>
+      <h2 className={styles.title}>{list.title}</h2>
       <ul className={styles.list}>
         {list.cards.map((card, index) => {
-          return <li key={index}>{card.item}</li>;
+          return <li key={index}>{card.title}</li>;
         })}
-        {/* {cards.length > 0
-          ? cards.map((card, index) => <li key={index}>{card}</li>)
-          : null} */}
       </ul>
 
       <AddItem itemType="card" addItem={addCard} />

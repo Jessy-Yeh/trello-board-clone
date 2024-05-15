@@ -5,8 +5,7 @@ import axios from "axios";
 import { BoardType } from "../../types";
 
 const Board = () => {
-  const [listTitles, setListTitles] = useState<string[]>([]);
-  const [boardData, setBoardData] = useState<BoardType>([]);
+  const [boardData, setBoardData] = useState<BoardType | null>(null);
 
   useEffect(() => {
     axios.get<BoardType>("http://localhost:3000/board").then((response) => {
@@ -17,15 +16,21 @@ const Board = () => {
 
   return (
     <div className="board">
-      <div className="lists">
-        {boardData.map((list, index) => (
-          <List title={list.title} key={index} list={list} />
-        ))}
-        {/* {listTitles.map((listTitle, index) => (
-          <List title={listTitle} key={index} />
-        ))} */}
-      </div>
-      <Addlist listTitles={listTitles} setListTitles={setListTitles} />
+      {boardData ? (
+        <>
+          <div className="lists">
+            {boardData.lists.map((list, index) => (
+              <List
+                key={index}
+                list={list}
+                boardData={boardData}
+                setBoardData={setBoardData}
+              />
+            ))}
+          </div>
+          <Addlist boardData={boardData} setBoardData={setBoardData} />
+        </>
+      ) : null}
     </div>
   );
 };

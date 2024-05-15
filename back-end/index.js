@@ -10,37 +10,55 @@ app.listen(PORT, () => {
   console.log("server listening on PORT:", PORT);
 });
 
-const board = [
-  {
-    title: "to do",
-    cards: [
-      {
-        item: "folding clothes",
-        label: "important",
-      },
-      { item: "washing dishes" },
-    ],
-  },
-  {
-    title: "questions",
-    cards: [
-      {
-        item: "Who is bao?",
-        label: "important",
-      },
-      { item: "where is mao?" },
-      { item: "rrrrrr" },
-    ],
-  },
-];
+const board = {
+  title: "test",
+  lists: [
+    {
+      title: "to do",
+      cards: [
+        {
+          title: "folding clothes",
+          label: "important",
+        },
+        { title: "washing dishes" },
+      ],
+    },
+    {
+      title: "questions",
+      cards: [
+        {
+          title: "Who is bao?",
+          label: "important",
+        },
+        { title: "where is mao?" },
+        { title: "rrrrrr" },
+      ],
+    },
+  ],
+};
 
 app.get("/board", (req, res) => {
   res.send(board);
 });
 
-app.post("board", (req, res) => {
-  res.send(req.body);
-});
+// real app would probably need these endpoints:
+// app.get("/boards", (req, res) => {
+//   res.send(boards);
+// });
+// app.post("/boards", (req, res) => {
+//   res.send(board);
+// });
+// app.get("/board/:id", (req, res) => {
+//   res.send(board);
+// });
+// app.patch("/board/:id", (req, res) => {
+//   res.send(board);
+// });
+// app.delete("/board/:id", (req, res) => {
+//   res.send(board);
+// });
+
+// app.post("board", (req, res) => {});
 
 // app.delete("board/:id", (req, res) => {
 //   const listId = parseInt(req.params.id);

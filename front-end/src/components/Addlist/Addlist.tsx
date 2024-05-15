@@ -1,19 +1,22 @@
 import styles from "./Addlist.module.css";
 import AddItem from "../AddItem/AddItem";
+import { BoardType } from "../../types";
 
 interface Props {
-  listTitles: string[];
-  setListTitles: React.Dispatch<React.SetStateAction<string[]>>;
+  boardData: BoardType;
+  setBoardData: React.Dispatch<React.SetStateAction<BoardType | null>>;
 }
 
-const Addlist = ({ listTitles, setListTitles }: Props) => {
-  const addNewListTitle = (newlist: string) => {
-    setListTitles([...listTitles, newlist]);
+const Addlist = ({ boardData, setBoardData }: Props) => {
+  const addNewList = (title: string) => {
+    const newlist = { title, cards: [] };
+    const newlists = [...boardData.lists, newlist];
+    setBoardData({ ...boardData, lists: newlists });
   };
 
   return (
     <div className={styles.container}>
-      <AddItem itemType="list" addItem={addNewListTitle} />
+      <AddItem itemType="list" addItem={addNewList} />
     </div>
   );
 };
