@@ -1,6 +1,7 @@
 import styles from "./Addlist.module.css";
 import AddItem from "../AddItem/AddItem";
 import { BoardType } from "../../types";
+import axios from "axios";
 
 interface Props {
   boardData: BoardType;
@@ -9,9 +10,15 @@ interface Props {
 
 const Addlist = ({ boardData, setBoardData }: Props) => {
   const addNewList = (title: string) => {
-    const newlist = { title, cards: [] };
-    const newlists = [...boardData.lists, newlist];
-    setBoardData({ ...boardData, lists: newlists });
+    const reqBody = { title };
+
+    axios
+      .patch("http://localhost:3000/board", reqBody)
+      .then((res) => {
+        const newlists = [...boardData.lists, res.data];
+        setBoardData({ ...boardData, lists: newlists });
+      })
+      .catch((error) => console.log(error));
   };
 
   return (
@@ -22,3 +29,10 @@ const Addlist = ({ boardData, setBoardData }: Props) => {
 };
 
 export default Addlist;
+
+// we send to API
+// { title }
+
+// api responds with
+// status 200 OK
+// { title, cards: [], id: "3k23k4jl2k3j4l23j" }

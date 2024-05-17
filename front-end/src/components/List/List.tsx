@@ -1,6 +1,7 @@
 import styles from "./List.module.css";
 import AddItem from "../AddItem/AddItem";
 import { ListType, BoardType } from "../../types";
+import axios from "axios";
 
 interface Props {
   list: ListType;
@@ -10,17 +11,22 @@ interface Props {
 
 const List = ({ list, boardData, setBoardData }: Props) => {
   const addCard = (title: string) => {
-    const newCard = { title, label: "" };
-    const updatedCards = [...list.cards, newCard];
-    const newlists = [...boardData.lists];
+    const reqBody = { title };
 
-    newlists.forEach((newlist) => {
-      if (newlist.title === list.title) {
-        newlist.cards = updatedCards;
-      }
-    });
+    axios
+      .patch(`http://localhost:3000/board/${list.id}`, reqBody)
+      .then((res) => {
+        const updatedCards = [...list.cards, res.data];
+        const newlists = [...boardData.lists];
 
-    setBoardData({ ...boardData, lists: newlists });
+        newlists.forEach((newlist) => {
+          if (newlist.title === list.title) {
+            newlist.cards = updatedCards;
+          }
+        });
+        setBoardData({ ...boardData, lists: newlists });
+      })
+      .catch((error) => console.log(error));
   };
 
   return (

@@ -36,7 +36,10 @@ const AddItem = ({ itemType, addItem }: Props) => {
           <div className={styles.actionButtonGroup}>
             <button
               className={styles.addItemButton}
-              onClick={() => addItem(itemValue)}
+              onClick={() => {
+                addItem(itemValue);
+                setItemValue("");
+              }}
             >
               Add {itemType}
             </button>
