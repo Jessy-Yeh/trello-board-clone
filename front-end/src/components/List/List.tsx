@@ -2,6 +2,8 @@ import styles from "./List.module.css";
 import AddItem from "../AddItem/AddItem";
 import { ListType, BoardType } from "../../types";
 import axios from "axios";
+import bin from "../../assets/bin.svg";
+import Card from "../Card/Card";
 
 interface Props {
   list: ListType;
@@ -37,7 +39,7 @@ const List = ({ list, boardData, setBoardData }: Props) => {
       </div>
       <ul className={styles.list}>
         {list.cards.map((card, index) => {
-          return <li key={index}>{card.title}</li>;
+          return <Card card={card} key={index} />;
         })}
       </ul>
 
