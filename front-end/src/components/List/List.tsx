@@ -31,15 +31,46 @@ const List = ({ list, boardData, setBoardData }: Props) => {
       .catch((error) => console.log(error));
   };
 
+  const deleteList = (list: ListType) => {
+    const config = {
+      data: {
+        id: list.id,
+      },
+    };
+    axios
+      .delete(`http://localhost:3000/board/${list.id}`, config)
+      .then(() => {
+        const findListIndex = boardData.lists.findIndex(
+          (elm) => elm.id === list.id
+        );
+        const copyOfOriginalLists = [...boardData.lists];
+        copyOfOriginalLists.splice(findListIndex, 1);
+        setBoardData({ ...boardData, lists: copyOfOriginalLists });
+      })
+      .catch((error) => console.log(error));
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.titleGroup}>
         <h2 className={styles.title}>{list.title}</h2>
-        <img className={styles.bin} src={bin} />
+        <img
+          className={styles.bin}
+          src={bin}
+          onClick={() => deleteList(list)}
+        />
       </div>
       <ul className={styles.list}>
         {list.cards.map((card, index) => {
-          return <Card card={card} key={index} />;
+          return (
+            <Card
+              card={card}
+              key={index}
+              list={list}
+              boardData={boardData}
+              setBoardData={setBoardData}
+            />
+          );
         })}
       </ul>
 

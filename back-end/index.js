@@ -20,30 +20,32 @@ app.get("/board", (req, res) => {
 
 // add list to board
 app.patch("/board", (req, res) => {
-  // we expect request body to look like:
-  // { title:"mao" }
   console.log(req);
-
   const newList = { id: uuidv4(), title: req.body.title, cards: [] };
-
   res.send(newList);
 });
 
 // add card to list
 app.patch("/board/:listId", (req, res) => {
   const newCard = { id: uuidv4(), title: req.body.title, label: "" };
-
   res.send(newCard);
 });
 
 // delete list from board
 app.delete("/board/:listId", (req, res) => {
-  res.send(initialBoard);
+  const deletedList = {
+    id: uuidv4(),
+  };
+  res.send(deletedList);
 });
 
 // delete card from list
 app.delete("/board/:listId/:cardId", (req, res) => {
-  res.send(initialBoard);
+  const deletedCard = {
+    id: uuidv4(),
+  };
+
+  res.send(deletedCard);
 });
 
 // // if we want multiple boards:
