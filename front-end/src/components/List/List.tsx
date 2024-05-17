@@ -31,7 +31,10 @@ const List = ({ list, boardData, setBoardData }: Props) => {
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>{list.title}</h2>
+      <div className={styles.titleGroup}>
+        <h2 className={styles.title}>{list.title}</h2>
+        <img className={styles.bin} src={bin} />
+      </div>
       <ul className={styles.list}>
         {list.cards.map((card, index) => {
           return <li key={index}>{card.title}</li>;
