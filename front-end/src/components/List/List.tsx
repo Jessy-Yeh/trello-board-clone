@@ -4,6 +4,7 @@ import { ListType, BoardType } from "../../types";
 import axios from "axios";
 import bin from "../../assets/bin.svg";
 import Card from "../Card/Card";
+import { useState } from "react";
 
 interface Props {
   list: ListType;
@@ -12,6 +13,7 @@ interface Props {
 }
 
 const List = ({ list, boardData, setBoardData }: Props) => {
+  const [isDeleteIconClicked, setIsDeleteIconClicked] = useState(false);
   const addCard = (title: string) => {
     const reqBody = { title };
 
@@ -51,31 +53,54 @@ const List = ({ list, boardData, setBoardData }: Props) => {
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.titleGroup}>
-        <h2 className={styles.title}>{list.title}</h2>
-        <img
-          className={styles.bin}
-          src={bin}
-          onClick={() => deleteList(list)}
-        />
-      </div>
-      <ul className={styles.list}>
-        {list.cards.map((card, index) => {
-          return (
-            <Card
-              card={card}
-              key={index}
-              list={list}
-              boardData={boardData}
-              setBoardData={setBoardData}
-            />
-          );
-        })}
-      </ul>
+    <>
+      <div className={styles.container}>
+        <div className={styles.titleGroup}>
+          <h2 className={styles.title}>{list.title}</h2>
+          <img
+            className={styles.bin}
+            src={bin}
+            onClick={() => setIsDeleteIconClicked((prev) => !prev)}
+          />
+        </div>
+        <ul className={styles.list}>
+          {list.cards.map((card, index) => {
+            return (
+              <Card
+                card={card}
+                key={index}
+                list={list}
+                boardData={boardData}
+                setBoardData={setBoardData}
+              />
+            );
+          })}
+        </ul>
 
-      <AddItem itemType="card" addItem={addCard} />
-    </div>
+        <AddItem itemType="card" addItem={addCard} />
+      </div>
+      {isDeleteIconClicked ? (
+        <div className={styles.deletePopup}>
+          <p>
+            Do you want to delete the <b>{list.title}</b> list?
+          </p>
+          <div className={styles.optionButtons}>
+            <button
+              className={styles.yesButton}
+              onClick={() => deleteList(list)}
+            >
+              Yes
+            </button>
+            <button
+              className={styles.noButton}
+              onClick={() => setIsDeleteIconClicked(false)}
+            >
+              No
+            </button>
+          </div>
+        </div>
+      ) : null}
+    </>
   );
 };
 

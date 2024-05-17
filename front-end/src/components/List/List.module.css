@@ -25,3 +25,43 @@
   height: 60%;
   cursor: pointer;
 }
+
+.deletePopup {
+  background-color: #fff;
+  padding: 5rem;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  -webkit-box-shadow: 10px 10px 24px -7px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 24px -7px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 24px -7px rgba(0, 0, 0, 0.75);
+}
+
+.optionButtons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.2rem;
+  /* justify-content: space-around; */
+}
+
+.yesButton {
+  color: white;
+  background-color: rgb(86, 156, 230);
+  padding: 0.5rem;
+  border-radius: 5px;
+  width: 60px;
+}
+
+.noButton {
+  background-color: rgb(229, 228, 228);
+  padding: 0.5rem;
+  border-radius: 5px;
+  width: 60px;
+}
