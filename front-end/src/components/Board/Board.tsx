@@ -18,16 +18,18 @@ const Board = () => {
     <div className="board">
       {boardData ? (
         <>
-          <div className="lists">
+          <ul className="lists">
             {boardData.lists.map((list, index) => (
-              <List
-                key={index}
-                list={list}
-                boardData={boardData}
-                setBoardData={setBoardData}
-              />
+              <li>
+                <List
+                  key={index}
+                  list={list}
+                  boardData={boardData}
+                  setBoardData={setBoardData}
+                />
+              </li>
             ))}
-          </div>
+          </ul>
           <Addlist boardData={boardData} setBoardData={setBoardData} />
         </>
       ) : null}
