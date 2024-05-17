@@ -1,0 +1,21 @@
+.cardGroup {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 40px;
+  background-color: #fff;
+  padding: 0.5rem;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  gap: 1rem;
+}
+
+.bin {
+  height: 20px;
+  cursor: pointer;
+}
+
+.cardGroup li {
+  min-width: 0;
+  overflow: hidden;
+}
