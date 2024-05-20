@@ -19,10 +19,9 @@ const Board = () => {
       {boardData ? (
         <>
           <ul className="lists">
-            {boardData.lists.map((list, index) => (
-              <li>
+            {boardData.lists.map((list) => (
+              <li key={list.id}>
                 <List
-                  key={index}
                   list={list}
                   boardData={boardData}
                   setBoardData={setBoardData}
