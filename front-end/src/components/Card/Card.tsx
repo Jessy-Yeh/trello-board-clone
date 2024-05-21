@@ -20,7 +20,7 @@ const Card = ({ card, list, boardData, setBoardData }: Props) => {
     axios
       .delete(`http://localhost:3000/board/${list.id}/${card.id}`, config)
       .then(() => {
-        const findCardIndex = list.cards.findIndex((elm) => elm.id === list.id);
+        const findCardIndex = list.cards.findIndex((elm) => elm.id === card.id);
         const updateListOfCards = [...list.cards];
         updateListOfCards.splice(findCardIndex, 1);
 
