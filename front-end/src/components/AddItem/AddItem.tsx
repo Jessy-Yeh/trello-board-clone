@@ -15,10 +15,14 @@ const AddItem = ({ itemType, addItem }: Props) => {
   };
 
   const handleEnterPress = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === "Enter") {
-      addItem(itemValue);
-      setItemValue("");
+    if (e.key === "Enter" && itemValue.length > 0) {
+      updateItem();
     }
+  };
+
+  const updateItem = () => {
+    addItem(itemValue);
+    setItemValue("");
   };
 
   return (
@@ -37,8 +41,9 @@ const AddItem = ({ itemType, addItem }: Props) => {
             <button
               className={styles.addItemButton}
               onClick={() => {
-                addItem(itemValue);
-                setItemValue("");
+                if (itemValue.length > 0) {
+                  updateItem();
+                }
               }}
             >
               Add {itemType}
