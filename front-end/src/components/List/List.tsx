@@ -14,11 +14,12 @@ interface Props {
 
 const List = ({ list, boardData, setBoardData }: Props) => {
   const [isDeleteIconClicked, setIsDeleteIconClicked] = useState(false);
+
   const addCard = (title: string) => {
     const reqBody = { title };
 
     axios
-      .patch(`http://localhost:3000/board/${list.id}`, reqBody)
+      .patch(`http://localhost:3000/board/list/${list.id}/cards`, reqBody)
       .then((res) => {
         const updatedCards = [...list.cards, res.data];
         const newlists = [...boardData.lists];
@@ -40,7 +41,7 @@ const List = ({ list, boardData, setBoardData }: Props) => {
       },
     };
     axios
-      .delete(`http://localhost:3000/board/${list.id}`, config)
+      .delete(`http://localhost:3000/board/list/${list.id}`, config)
       .then(() => {
         const findListIndex = boardData.lists.findIndex(
           (elm) => elm.id === list.id
@@ -53,7 +54,7 @@ const List = ({ list, boardData, setBoardData }: Props) => {
   };
 
   return (
-    <>
+    <div>
       <div className={styles.container}>
         <div className={styles.titleGroup}>
           <h2 className={styles.title}>{list.title}</h2>
@@ -100,7 +101,7 @@ const List = ({ list, boardData, setBoardData }: Props) => {
           </div>
         </div>
       ) : null}
-    </>
+    </div>
   );
 };
 

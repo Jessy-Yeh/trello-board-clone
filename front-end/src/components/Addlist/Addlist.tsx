@@ -13,7 +13,7 @@ const Addlist = ({ boardData, setBoardData }: Props) => {
     const reqBody = { title };
 
     axios
-      .patch("http://localhost:3000/board", reqBody)
+      .patch("http://localhost:3000/board/lists", reqBody)
       .then((res) => {
         const newlists = [...boardData.lists, res.data];
         setBoardData({ ...boardData, lists: newlists });

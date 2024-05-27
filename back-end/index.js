@@ -1,12 +1,11 @@
 import express, { json } from "express";
-import { v4 as uuidv4 } from "uuid";
 import cors from "cors";
-import { initialBoard } from "./dummyData/index.js";
 import {
   deleteListFromBoard,
   deleteCardFromList,
   addListToBoard,
   addCardToList,
+  updateBoard,
 } from "./db/index.js";
 
 const app = express();
@@ -20,71 +19,78 @@ app.listen(PORT, () => {
 });
 
 // get board
-app.get("/board", (req, res) => {
-  res.send(initialBoard);
-});
-
-// add list to board
-app.patch("/board", async (req, res) => {
-  const newList = { id: uuidv4(), title: req.body.title, cards: [] };
-  const result = await addListToBoard(newList);
+app.get("/board", async (_, res) => {
+  const result = await getBoard();
 
   if (result.success) {
-    res.send(newList);
+    res.send(result.data);
   } else {
     res.status(500);
   }
 });
 
-// add card to list
-app.patch("/board/:listId", async (req, res) => {
-  const newCard = { id: uuidv4(), title: req.body.title, label: "" };
-  const result = await addCardToList(req.params.listId, newCard);
+// update board (re-order lists)
+app.patch("/board", async (req, res) => {
+  const result = await updateBoard(req.body);
 
   if (result.success) {
-    res.send(newCard);
+    res.send(result.data);
+  } else {
+    res.status(500);
+  }
+});
+
+// add list to board
+app.post("/board/lists", async (req, res) => {
+  const result = await addListToBoard(req.body.title);
+
+  if (result.success) {
+    res.send(result.data);
   } else {
     res.status(500);
   }
 });
 
 // delete list from board
-app.delete("/board/:listId", async (req, res) => {
+app.delete("/board/list/:listId", async (req, res) => {
   const result = await deleteListFromBoard(req.params.listId);
 
   if (result.success) {
-    const response = {
-      id: req.params.cardId,
-    };
+    res.send(result.data);
+  } else {
+    res.status(500);
+  }
+});
 
-    res.send(response);
+// update list (change list title or re-order cards)
+app.patch("/board/list/:listId", async (req, res) => {
+  const result = await updateList(req.params.listId, req.body);
+
+  if (result.success) {
+    res.send(result.data);
+  } else {
+    res.status(500);
+  }
+});
+
+// add card to list
+app.post("/board/list/:listId/cards", async (req, res) => {
+  const result = await addCardToList(req.params.listId, req.body.title);
+
+  if (result.success) {
+    res.send(result.data);
   } else {
     res.status(500);
   }
 });
 
 // delete card from list
-app.delete("/board/:listId/:cardId", async (req, res) => {
+app.delete("/board/list/:listId/card/:cardId", async (req, res) => {
   const result = await deleteCardFromList(req.params.listId, req.params.cardId);
 
   if (result.success) {
-    const response = {
-      id: req.params.cardId,
-    };
-
-    console.log(response);
-    res.send(response);
+    res.send(result.data);
   } else {
     res.status(500);
   }
 });
-
-// // if we want multiple boards:
-// // get all boards
-// app.get("/boards", (req, res) => {
-//   res.send(boards);
-// });
-// // create new board
-// app.post("/boards", (req, res) => {
-//   res.send(boards);
-// });
