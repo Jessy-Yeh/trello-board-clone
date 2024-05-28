@@ -6,6 +6,7 @@ import {
   addListToBoard,
   addCardToList,
   updateBoard,
+  getBoard,
 } from "./db/index.js";
 
 const app = express();

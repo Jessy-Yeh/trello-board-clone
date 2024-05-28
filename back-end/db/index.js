@@ -28,7 +28,7 @@ export async function updateBoard(updateBoardData) {
       }
     });
 
-    newBoardData.lists = newLists;
+    initialBoard.lists = newLists;
   }
 
   return {
@@ -87,7 +87,7 @@ export async function updateList(listId, updateListData) {
       }
     });
 
-    newListData.cards = newCards;
+    initialList.cards = newCards;
   }
 
   return {
