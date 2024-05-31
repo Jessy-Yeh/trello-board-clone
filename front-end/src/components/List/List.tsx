@@ -58,11 +58,12 @@ const List = ({ list, boardData, setBoardData }: Props) => {
       <div className={styles.container}>
         <div className={styles.titleGroup}>
           <h2 className={styles.title}>{list.title}</h2>
-          <img
-            className={styles.bin}
-            src={bin}
+          <div
+            className={styles.binContainer}
             onClick={() => setIsDeleteIconClicked((prev) => !prev)}
-          />
+          >
+            <img className={styles.bin} src={bin} />
+          </div>
         </div>
         <ul className={styles.list}>
           {list.cards.map((card, index) => {

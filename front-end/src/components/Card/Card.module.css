@@ -13,9 +13,14 @@
 .bin {
   height: 20px;
   cursor: pointer;
+  display: none;
 }
 
 .cardGroup li {
   min-width: 0;
   overflow: hidden;
+}
+
+.cardGroup:hover .bin {
+  display: block;
 }
