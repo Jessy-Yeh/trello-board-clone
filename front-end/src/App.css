@@ -10,17 +10,3 @@ body {
   margin: 0;
   background-repeat: no-repeat;
 }
-
-.container {
-  padding: 0 1rem;
-}
-
-.lists {
-  display: flex;
-  gap: 1rem;
-}
-
-.board {
-  display: flex;
-  gap: 1rem;
-}

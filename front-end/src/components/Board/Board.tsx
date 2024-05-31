@@ -4,6 +4,7 @@ import List from "../List/List";
 import axios from "axios";
 import { BoardType } from "../../types";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import styles from "./Board.module.css";
 
 // interface ResultProps {
 //   combine: Combine | null | undefined;
@@ -51,13 +52,13 @@ const Board = () => {
   };
 
   return (
-    <div className="board">
+    <div className={styles.board}>
       {boardData ? (
         <DragDropContext onDragEnd={handleOnDragEnd}>
           <Droppable droppableId="lists">
             {(provided) => (
               <ul
-                className="lists"
+                className={styles.lists}
                 ref={provided.innerRef}
                 {...provided.droppableProps}
               >

@@ -1,0 +1,13 @@
+.board {
+  display: flex;
+  gap: 1rem;
+  min-width: 100vw;
+  height: 90vh;
+  overflow: scroll;
+  padding: 0 1rem;
+}
+
+.lists {
+  display: flex;
+  gap: 1rem;
+}
