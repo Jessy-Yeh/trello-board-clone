@@ -19,7 +19,7 @@ const List = ({ list, boardData, setBoardData }: Props) => {
     const reqBody = { title };
 
     axios
-      .patch(`http://localhost:3000/board/list/${list.id}/cards`, reqBody)
+      .post(`http://localhost:3000/board/list/${list.id}/cards`, reqBody)
       .then((res) => {
         const updatedCards = [...list.cards, res.data];
         const newlists = [...boardData.lists];
